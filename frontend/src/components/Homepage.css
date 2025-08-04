@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.types {
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 71, 171);
+    font-size: x-large;
+    font-weight: 800;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+p{
+  margin-top: 3px;
+}
+.tyres-container,
+.batteries-container,
+.filters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15%;
+    margin-bottom: 100px;
+}
+
+.product-card {
+    background-color: white;
+    width: 100%;
+}
+.product-card img {
+    height: auto;
+    width: 50%;
+}
+.price {
+    color: rgb(240, 9, 9);
+}
+
+.product-card p {
+    font-size: medium;
+    font-weight: 600;
+}
+.product-card button {
+    border-radius: 5px;
+    background-color: rgb(0, 71, 171);
+    border-color: rgb(0, 71, 171);
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.product-card button:active {
+    background-color: rgb(3, 36, 81);
+    border-color: rgb(3, 36, 81);
+}
+
+.details {
+    margin-top: -15px;
+}
+#view {
+    color: black;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.social-media ul {
+    list-style-type: none;
+    display: flex;
+    gap: 50px;
+    margin: -10px -10px;
+    padding: 10px 100px;
+    cursor: pointer;
+    background-color: rgb(0, 71, 171);
+    cursor: pointer;
+    font-size: large;
+}
+.social-media a {
+    color: white;
+}
+.social-media a:hover {
+    color: rgb(80, 255, 0);
+}
+#copyright {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0, 71, 171);
+    margin: -10px -10px;
+    color: white;
+}
+
