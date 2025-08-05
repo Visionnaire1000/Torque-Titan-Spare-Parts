@@ -1,4 +1,4 @@
-import './Homepage.css';
+/*import './Homepage.css';
 
 const Homepage = () => {
   return (
@@ -272,4 +272,65 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Homepage;  */
+
+
+import { useEffect, useState } from 'react';
+import './Homepage.css';
+
+const HomePage = () => {
+  const [spareParts, setSpareParts] = useState([]);
+  const [topIndex, setTopIndex] = useState(0);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/spareParts')
+      .then(res => res.json())
+      .then(data => setSpareParts(data))
+      .catch(err => console.error('Error fetching parts:', err));
+  }, []);
+
+  // Cycle through top 8 items in chunks of 4
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      setTopIndex(prev => (prev + 4) % 8);
+    }, 4000); // change every 4 seconds
+    return () => clearTimeout(interval);
+  }, [topIndex]);
+
+  const topItems = spareParts.slice(0, 8);
+  const rotatingTopItems = topItems.slice(topIndex, topIndex + 4).length === 4
+    ? topItems.slice(topIndex, topIndex + 4)
+    : [...topItems.slice(topIndex), ...topItems.slice(0, 4 - (topItems.length - topIndex))];
+
+  const bottomItems = spareParts.slice(8);
+
+  return (
+    <div className="homepage">
+      <div className="hot-deals-sticker">🔥 Hot Deals</div>
+      <div className="top-items">
+        {rotatingTopItems.map(item => (
+          <div key={item.id} className="item-card">
+            <img src={item.imageUrl} alt={item.name} />
+            <h4>{item.name}</h4>
+            <p>{item.brand}</p>
+            <p>${item.price}</p>
+            <button class="add-to-cart">Add To Cart</button>
+          </div>
+        ))}
+      </div>
+      <div className="bottom-items">
+        {bottomItems.map(item => (
+          <div key={item.id} className="item-card">
+            <img src={item.imageUrl} alt={item.name} />
+            <h4>{item.name}</h4>
+            <p>{item.brand}</p>
+            <p>${item.price}</p>
+            <button class="add-to-cart">Add To Cart</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;

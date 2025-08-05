@@ -1,4 +1,5 @@
-.dashboard-container {
+
+ /*.dashboard-container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
@@ -42,7 +43,7 @@
     margin-top: 1rem;
   }
   
-  /* Add styling for images and buttons inside FarmerAnimals if needed */
+ 
   .image-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -76,5 +77,146 @@
   
   .image-card button:hover {
     background-color: rgb(0, 50, 100);
-  }
-  
+  }    */
+
+
+
+ /* FilterSideBar.css */
+
+
+ /* FilterSideBar.css */
+
+.filter-sidebar {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.info-cards {
+  margin-bottom: 20px;
+}
+
+.info-card {
+  margin-bottom: 10px;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #4caf50;
+  border-radius: 8px;
+}
+
+.info-card h4 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.filter-button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #43a047;
+}
+
+.animal-results {
+  margin-top: 30px;
+}
+
+.animal-card {
+  display: flex;
+  align-items: center;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.animal-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+.animal-info {
+  flex: 1;
+}
+
+.animal-type {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.animal-breed-age {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.animal-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2e7d32;
+  margin-top: 6px;
+}
+
+.view-details {
+  text-decoration: none;
+}
+
+.details-button {
+  margin-top: 8px;
+  color: #2196f3;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}

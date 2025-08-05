@@ -13,6 +13,7 @@ import Stripe from "./components/Stripe";
 import { CartProvider } from "./contexts/CartContext";
 import RoleProtectedRoute from "./components/RoleProtectedRoute"; 
 import { ToastContainer } from 'react-toastify';
+import SearchResults from './components/SearchResults';
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
@@ -51,6 +52,7 @@ function App() {
                 {/*<RoleProtectedRoute role="farmer">
                    <FarmerDashboard />
                 </RoleProtectedRoute>  */}  
+              <Route path="/search-results" element={<SearchResults />} />
             </Routes>
           </main>
           <Footer />

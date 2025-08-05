@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AnimalCard = ({ animal, onClick }) => {
+const ItemCard = ({ animal, onClick }) => {
   return (
     <div className="card" onClick={() => onClick(animal)}>
       <div className="imageContainer">
@@ -22,4 +22,4 @@ const AnimalCard = ({ animal, onClick }) => {
   );
 };
 
-export default AnimalCard;
+export default ItemCard;

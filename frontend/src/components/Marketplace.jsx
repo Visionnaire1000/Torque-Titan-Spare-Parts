@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AnimalCard from './ItemCard';
+import ItemCard from './ItemCard';
 import FilterSideBar from './FilterSideBar';
 
 const Marketplace = () => {
@@ -42,7 +42,7 @@ const Marketplace = () => {
       <div className="animalList">
         {filteredAnimals.length > 0 ? (
           filteredAnimals.map((animal) => (
-            <AnimalCard key={animal.id} animal={animal} />
+            <ItemCard key={animal.id} animal={animal} />
           ))
         ) : (
           <div className="noAnimals">

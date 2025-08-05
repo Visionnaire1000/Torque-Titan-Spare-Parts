@@ -1,4 +1,4 @@
-import { useState } from 'react';
+/*import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import config from '../config';
@@ -141,4 +141,135 @@ const FilterSideBar = ({ onApplyFilters }) => {
   );
 };
 
-export default FilterSideBar;  
+export default FilterSideBar;    */
+
+
+
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import config from '../config';
+import 'react-toastify/dist/ReactToastify.css';
+import './FilterSideBar.css';
+
+const FilterSideBar = ({ onApplyFilters }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+
+  const parseSearchTerm = (term) => {
+    const parsed = {
+      type: '',
+      breed: '',
+      age: ''
+    };
+
+    const tokens = term.toLowerCase().split(',').map(t => t.trim());
+
+    tokens.forEach(token => {
+      if (!isNaN(Number(token))) {
+        parsed.age = token;
+      } else if (['heifer', 'bullock', 'ram', 'buck'].includes(token)) {
+        parsed.type = token;
+      } else {
+        parsed.breed = token;
+      }
+    });
+
+    return parsed;
+  };
+
+  const handleApplyFilters = () => {
+    const stored = localStorage.getItem('farmartUser');
+    if (!stored) {
+      toast.error('Not authenticated');
+      return;
+    }
+
+    const { token } = JSON.parse(stored);
+    const filters = parseSearchTerm(searchTerm);
+    const params = new URLSearchParams();
+    if (filters.breed) params.append('breed', filters.breed);
+    if (filters.type) params.append('type', filters.type);
+    if (filters.age) params.append('age', filters.age);
+
+    fetch(`${config.API_BASE_URL}/animals?${params.toString()}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!Array.isArray(data) || data.length === 0) {
+          toast.error('No animals found');
+          return;
+        }
+
+        const animalsWithDetails = data.map((animal) => ({
+          id: animal.id,
+          type: animal.type,
+          breed: animal.breed,
+          age: animal.age,
+          price: animal.price,
+          image: animal.image || 'https://via.placeholder.com/80',
+          farmer_name: animal.farmer_name
+        }));
+
+        setResults(animalsWithDetails);
+        toast.success('Filters applied successfully');
+      })
+      .catch((err) => {
+        console.error('[FilterSidebar] Error:', err);
+        toast.error(err.message || 'Failed to fetch animals');
+      });
+  };
+
+  return (
+    <div className="filter-sidebar">
+      <div className="info-cards">
+        <div className="info-card">
+          <h4>Smart Search</h4>
+          <p>Enter type, breed, or age—e.g. “heifer, suffolk, 2”—to retrieve refined animal listings.</p>
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label>Search:</label>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="e.g. heifer, suffolk, 2"
+          className="input-field"
+        />
+      </div>
+
+      <button onClick={handleApplyFilters} className="filter-button">
+        Apply Filters
+      </button>
+
+      {results.length > 0 && (
+        <div className="animal-results">
+          {results.map((animal) => (
+            <div key={animal.id} className="animal-card">
+              <img src={animal.image} alt={animal.type} className="animal-image" />
+              <div className="animal-info">
+                <div className="animal-type">{animal.type}</div>
+                <div className="animal-breed-age">
+                  Breed: {animal.breed} • Age: {animal.age}
+                  <p>Farmer: {animal.farmer_name}</p>
+                </div>
+                <div className="animal-price">${animal.price.toLocaleString()}</div>
+              </div>
+
+              <Link to={`/animals/${animal.id}`} className="view-details">
+                <p className="details-button">View Details</p>
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default FilterSideBar;
